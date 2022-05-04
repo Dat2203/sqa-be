@@ -15,14 +15,15 @@ const path = require("path");
 dotenv.config();
 
 const port = process.env.PORT || 4000;
-
-mongoose.connect(
-  "mongodb+srv://dat2203:anh220301@cluster0.nmxuq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("Connected to MongoDB");
-  }
-);
+const DATABASE_URL =
+  process.env.DATABASE_URL ||
+  mongoose.connect(
+    DATABASE_URL,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => {
+      console.log("Connected to MongoDB");
+    }
+  );
 
 app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "public/images")));
